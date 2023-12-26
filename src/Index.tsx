@@ -1,8 +1,9 @@
 // index.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { deleteUserFromDB, signInWithAPI } from "../api";
+import ReactDOM from "react-dom";
 
-export default function IndexPage() {
+function IndexPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -49,3 +50,5 @@ export default function IndexPage() {
     </div>
   );
 }
+
+ReactDOM.render(<IndexPage />, document.getElementById("root"));
