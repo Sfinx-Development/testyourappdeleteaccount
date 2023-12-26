@@ -1,7 +1,7 @@
 // index.tsx
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import { deleteUserFromDB, signInWithAPI } from "./api";
+import { deleteUserFromDB, signInWithAPI } from "../api";
 
 export default function IndexPage() {
   const [email, setEmail] = useState("");
