@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { deleteUserFromDB, signInWithAPI } from "../api";
 
-export const Index: React.FC = () => {
+export default function IndexPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -48,4 +48,4 @@ export const Index: React.FC = () => {
       <button onClick={handleDeleteAccount}>Delete Account</button>
     </div>
   );
-};
+}

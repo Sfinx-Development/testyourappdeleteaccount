@@ -6,10 +6,10 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { Index } from "./Index";
+import IndexPage from "./Index";
 
 const router = createBrowserRouter(
-  createRoutesFromElements(<Route index element={<Index />}></Route>)
+  createRoutesFromElements(<Route index element={<IndexPage />}></Route>)
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
