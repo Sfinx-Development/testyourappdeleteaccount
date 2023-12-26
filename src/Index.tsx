@@ -1,6 +1,6 @@
 // index.tsx
 import React, { useState } from "react";
-import { deleteUserFromDB, signInWithAPI } from "./api";
+import { deleteUserFromDB, signInWithAPI } from "../api";
 
 export const Index: React.FC = () => {
   const [email, setEmail] = useState("");
