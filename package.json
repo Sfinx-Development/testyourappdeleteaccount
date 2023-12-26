@@ -1,6 +1,6 @@
 {
   "name": "deleteaccount",
-  "private": true,
+  "homepage": "https://sfinx-development.github.io/testyourappdeleteaccount",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
