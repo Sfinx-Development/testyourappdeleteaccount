@@ -3,7 +3,7 @@ import { useState } from "react";
 import { deleteUserFromDB, signInWithAPI } from "../api";
 import ReactDOM from "react-dom";
 
-function IndexPage() {
+export default function IndexPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
