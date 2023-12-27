@@ -1,7 +1,7 @@
 // index.tsx
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import { deleteUserFromDB, signInWithAPI } from "../api";
+import { deleteUserFromDb, signInWithAPI } from "../api";
 
 export default function IndexPage() {
   const [email, setEmail] = useState("");
@@ -9,15 +9,15 @@ export default function IndexPage() {
 
   const handleDeleteAccount = async () => {
     try {
-      const user = await signInWithAPI({ email: email, password: password });
+      const user = await signInWithAPI({ email, password });
 
       if (user) {
-        const isDeleted = await deleteUserFromDB(user.uid);
+        const isDeleted = await deleteUserFromDb({ email, password });
         if (isDeleted) {
           alert("Deleted account!");
         }
       } else {
-        alert(`Failed to delete account`);
+        alert("Failed to delete account");
       }
     } catch (error) {
       console.error("Error deleting account:", error);
@@ -26,27 +26,46 @@ export default function IndexPage() {
   };
 
   return (
-    <div>
-      <h1>TEST YOUR APP - DELETE ACCOUNT</h1>
-      <label htmlFor="email">Email:</label>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1 style={{ color: "#4CAF50" }}>TEST YOUR APP - DELETE ACCOUNT</h1>
+      <label htmlFor="email" style={{ color: "#333" }}>
+        Email:
+      </label>
+      <br />
       <input
         type="email"
         id="email"
         name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        style={{ padding: "5px", margin: "5px", width: "200px" }}
       />
       <br />
-      <label htmlFor="password">Password:</label>
+      <label htmlFor="password" style={{ color: "#333" }}>
+        Password:
+      </label>
+      <br />
       <input
         type="password"
         id="password"
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        style={{ padding: "5px", margin: "5px", width: "200px" }}
       />
       <br />
-      <button onClick={handleDeleteAccount}>Delete Account</button>
+      <button
+        onClick={handleDeleteAccount}
+        style={{
+          backgroundColor: "#4CAF50",
+          color: "white",
+          padding: "10px",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        Delete Account
+      </button>
     </div>
   );
 }

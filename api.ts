@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {
   collection,
   deleteDoc,
@@ -24,11 +24,31 @@ export const signInWithAPI = async (createUser: UserCreate) => {
   } as User;
 };
 
-export const deleteUserFromDB = async (userId: string) => {
+export const deleteUserFromDb = async (user: UserCreate) => {
+  try {
+    const auth = getAuth();
+
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      user.email,
+      user.password
+    );
+
+    await deleteUserRelatedFromDB(userCredential.user.uid);
+
+    await auth.currentUser?.delete();
+
+    return true;
+  } catch (error) {
+    console.error("Error deleting account:", error);
+    throw error;
+  }
+};
+
+export const deleteUserRelatedFromDB = async (userId: string) => {
   const account = await getAccountByUid(userId);
 
   if (account) {
-    //radera alla testertoapps som denna testern är i
     const testerToAppQuery = query(
       collection(db, "testerToApps"),
       where("accountId", "==", account.id)
@@ -52,9 +72,6 @@ export const deleteUserFromDB = async (userId: string) => {
     //radera accountet som den har
     const accountDocRef = doc(db, "accounts", account.id);
     await deleteDoc(accountDocRef);
-
-    const userDocRef = doc(db, "users", userId);
-    await deleteDoc(userDocRef);
   }
   return true;
 };
